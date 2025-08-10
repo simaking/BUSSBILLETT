@@ -39,6 +39,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
+      <View style={styles.topBar} />
       <ScrollView contentContainerStyle={styles.content}>
         {/* Top header */}
         <View style={styles.headerRow}>
@@ -150,6 +151,10 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 16,
     paddingBottom: 32,
+  },
+  topBar: {
+    height: 10,
+    backgroundColor: colors.purple,
   },
   headerRow: {
     flexDirection: 'row',
