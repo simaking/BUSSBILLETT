@@ -90,7 +90,6 @@ export default function App() {
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
             <Text style={styles.outlineText}>Europeisk studentbevis</Text>
-            <Ionicons name="qr-code" size={18} color="#6b4eff" />
           </View>
         </Pressable>
 
@@ -250,18 +249,21 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderWidth: 2,
     borderColor: '#7bd1a9',
+    alignItems: 'center',
   },
   validHeader: {
     fontFamily: 'Inter_700Bold',
     fontSize: 18,
     color: colors.textDark,
     marginBottom: 4,
+    textAlign: 'center',
   },
   validSub: {
     fontFamily: 'Inter_500Medium',
     fontSize: 14,
     color: colors.textMuted,
     marginBottom: 6,
+    textAlign: 'center',
   },
   bold: {
     fontFamily: 'Inter_600SemiBold',
@@ -270,6 +272,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
     color: colors.textDark,
+    textAlign: 'center',
   },
   primaryButton: {
     backgroundColor: colors.purple,
@@ -295,7 +298,7 @@ const styles = StyleSheet.create({
   outlineInner: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   outlineText: {
     fontFamily: 'Inter_600SemiBold',
