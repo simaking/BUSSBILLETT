@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useMemo, useState } from 'react';
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useMemo, useState, useRef } from 'react';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -14,6 +14,8 @@ export default function App() {
   });
   const [showKontroll, setShowKontroll] = useState(false);
   const [showEuCard, setShowEuCard] = useState(false);
+  const [isKontrollAnimating, setIsKontrollAnimating] = useState(false);
+  const colorAnim = useRef(new Animated.Value(0)).current;
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -26,7 +28,25 @@ export default function App() {
     return `${day}.${month}.${year} kl. ${hours}:${minutes} (CEST)`;
   }, [now]);
 
-  const onShowKontroll = useCallback(() => setShowKontroll(true), []);
+  const runKontrollAnimation = useCallback(() => {
+    if (isKontrollAnimating) return;
+    setIsKontrollAnimating(true);
+    const forward = Animated.timing(colorAnim, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    });
+    const backward = Animated.timing(colorAnim, {
+      toValue: 0,
+      duration: 500,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    });
+    Animated.loop(Animated.sequence([forward, backward]), { iterations: 3 }).start(() => {
+      setIsKontrollAnimating(false);
+    });
+  }, [colorAnim, isKontrollAnimating]);
   const onShowEu = useCallback(() => setShowEuCard(true), []);
 
   if (!fontsLoaded) {
@@ -41,6 +61,11 @@ export default function App() {
       </SafeAreaProvider>
     );
   }
+
+  const animatedCardBackground = colorAnim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ['#c6f5df', '#7ABD9E', '#106A42'],
+  });
 
   return (
     <SafeAreaProvider>
@@ -76,14 +101,14 @@ export default function App() {
         </View>
 
         {/* Green validity card */}
-        <View style={styles.validityCard}>
+        <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground }]}>
           <Text style={styles.validHeader}>Gyldig studentbevis</Text>
           <Text style={styles.validSub}>Vår 2025</Text>
           <Text style={styles.validExpire}><Text style={styles.bold}>Utløper:</Text> 31.08.2025</Text>
-        </View>
+        </Animated.View>
 
         {/* Buttons */}
-        <Pressable onPress={onShowKontroll} style={({ pressed }) => [styles.primaryButton, pressed && { opacity: 0.9 }]}>
+        <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
           <Text style={styles.primaryButtonText}>Kontroll</Text>
         </Pressable>
 
@@ -99,7 +124,6 @@ export default function App() {
           <Text style={styles.metaText}>Tidssone: Europe/Oslo</Text>
           <Text style={styles.metaText}>Versjon: 4.1.8</Text>
         </View>
-        </ScrollView>
 
         {/* Kontroll modal */}
         <Modal visible={showKontroll} animationType="slide" transparent>
@@ -128,6 +152,7 @@ export default function App() {
             </View>
           </View>
         </Modal>
+        </ScrollView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
