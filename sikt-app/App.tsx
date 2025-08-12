@@ -170,6 +170,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 2,
+    borderBottomWidth: 2,
+    borderBottomColor: '#8665B9',
   },
   headerLeft: {
     flexDirection: 'row',
@@ -202,7 +204,7 @@ const styles = StyleSheet.create({
   },
   profileCard: {
     backgroundColor: colors.purpleCard,
-    borderColor: colors.outline,
+    borderColor: '#8665b9',
     borderWidth: 2,
     borderRadius: 14,
     padding: 16,
