@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <TopBar />
       <ScrollView contentContainerStyle={styles.content}>
         {/* Profile avatar */}
@@ -133,7 +133,7 @@ function TopBar() {
         </View>
         <Text style={styles.headerTitle}>Sikt</Text>
       </View>
-      <Ionicons name="ellipsis-vertical" size={20} color="#FFFFFF" />
+      <Ionicons name="ellipsis-vertical" size={20} color={colors.purple} />
     </View>
   );
 }
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   headerBar: {
     height: 60,
     width: '100%',
-    backgroundColor: '#9B5BFF',
+    backgroundColor: colors.purpleCard,
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontFamily: 'Inter_600SemiBold',
     fontSize: 18,
-    color: '#FFFFFF',
+    color: colors.textDark,
   },
   avatarWrap: {
     alignItems: 'center',
