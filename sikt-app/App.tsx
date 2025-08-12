@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useCallback, useMemo, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useMemo, useState, useRef } from 'react';
 import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
@@ -16,8 +16,7 @@ export default function App() {
   const [showEuCard, setShowEuCard] = useState(false);
   const [isKontrollAnimating, setIsKontrollAnimating] = useState(false);
   const colorAnim = useRef(new Animated.Value(0)).current;
-  const [isTextWhite, setIsTextWhite] = useState(false);
-  const timerHandles = useRef<number[]>([]);
+  const textAnim = useRef(new Animated.Value(0)).current;
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -33,9 +32,6 @@ export default function App() {
   const runKontrollAnimation = useCallback(() => {
     if (isKontrollAnimating) return;
     setIsKontrollAnimating(true);
-    // Clear any residual timers
-    timerHandles.current.forEach(h => clearTimeout(h));
-    timerHandles.current = [];
     const forward = Animated.timing(colorAnim, {
       toValue: 1,
       duration: 500,
@@ -48,31 +44,30 @@ export default function App() {
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     });
-    // Schedule text color toggles for each 1s cycle
-    for (let i = 0; i < 3; i += 1) {
-      const toWhiteAt = setTimeout(() => setIsTextWhite(true), i * 1000 + 250);
-      const toOriginalAt = setTimeout(() => setIsTextWhite(false), i * 1000 + 750);
-      timerHandles.current.push(Number(toWhiteAt), Number(toOriginalAt));
-    }
-    // Ensure final state reset
-    const finalize = setTimeout(() => setIsTextWhite(false), 3000);
-    timerHandles.current.push(Number(finalize));
-
-    Animated.loop(Animated.sequence([forward, backward]), { iterations: 3 }).start(() => {
-      setIsKontrollAnimating(false);
-      // Cleanup timers array
-      timerHandles.current.forEach(h => clearTimeout(h));
-      timerHandles.current = [];
+    // Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
+    textAnim.setValue(0);
+    const textFadeIn = Animated.timing(textAnim, {
+      toValue: 1,
+      duration: 250,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
     });
-  }, [colorAnim, isKontrollAnimating]);
-  const onShowEu = useCallback(() => setShowEuCard(true), []);
+    const textHold = Animated.delay(500);
+    const textFadeOut = Animated.timing(textAnim, {
+      toValue: 0,
+      duration: 250,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    });
 
-  useEffect(() => {
-    return () => {
-      timerHandles.current.forEach(h => clearTimeout(h));
-      timerHandles.current = [];
-    };
-  }, []);
+    Animated.parallel([
+      Animated.loop(Animated.sequence([forward, backward]), { iterations: 3 }),
+      Animated.loop(Animated.sequence([textFadeIn, textHold, textFadeOut]), { iterations: 3 }),
+    ]).start(() => {
+      setIsKontrollAnimating(false);
+    });
+  }, [colorAnim, isKontrollAnimating, textAnim]);
+  const onShowEu = useCallback(() => setShowEuCard(true), []);
 
   if (!fontsLoaded) {
     return (
@@ -91,9 +86,9 @@ export default function App() {
     inputRange: [0, 0.5, 1],
     outputRange: ['#c6f5df', '#7ABD9E', '#106A42'],
   });
-  const validHeaderColor = isTextWhite ? '#FFFFFF' : colors.textDark;
-  const validSubColor = isTextWhite ? '#FFFFFF' : colors.textMuted;
-  const validExpireColor = isTextWhite ? '#FFFFFF' : colors.textDark;
+  const headerTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#FFFFFF'] });
+  const subTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textMuted, '#FFFFFF'] });
+  const expireTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#FFFFFF'] });
 
   return (
     <SafeAreaProvider>
@@ -130,9 +125,9 @@ export default function App() {
 
         {/* Green validity card */}
         <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground }]}>
-          <Text style={[styles.validHeader, { color: validHeaderColor }]}>Gyldig studentbevis</Text>
-          <Text style={[styles.validSub, { color: validSubColor }]}>Vår 2025</Text>
-          <Text style={[styles.validExpire, { color: validExpireColor }]}><Text style={styles.bold}>Utløper:</Text> 31.08.2025</Text>
+          <Animated.Text style={[styles.validHeader, { color: headerTextColor }]}>Gyldig studentbevis</Animated.Text>
+          <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Vår 2025</Animated.Text>
+          <Animated.Text style={[styles.validExpire, { color: expireTextColor }]}><Text style={styles.bold}>Utløper:</Text> 31.08.2025</Animated.Text>
         </Animated.View>
 
         {/* Buttons */}
