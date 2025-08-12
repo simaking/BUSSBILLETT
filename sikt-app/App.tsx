@@ -38,18 +38,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      <View style={styles.topBar} />
+      <StatusBar style="light" />
+      <TopBar />
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Top header */}
-        <View style={styles.headerRow}>
-          <View style={styles.brandRow}>
-            <Ionicons name="infinite" size={24} color="#1a1a1a" />
-            <Text style={styles.brandText}>Sikt</Text>
-          </View>
-          <Ionicons name="ellipsis-vertical" size={20} color="#6b4eff" />
-        </View>
-
         {/* Profile avatar */}
         <View style={styles.avatarWrap}>
           <Image
@@ -60,7 +51,7 @@ export default function App() {
 
         {/* Purple Student Profile Card */}
         <View style={styles.profileCard}>
-          <Text style={styles.nameText}>Simon Ishoel (23)</Text>
+          <Text style={styles.nameText}>Even Martin Ab elseth Riksheim (23)</Text>
           <View style={styles.infoRow}>
             <MaterialIcons name="calendar-today" size={18} color="#1a1a1a" />
             <Text style={styles.infoText}>Fødselsdato: 24.09.2001</Text>
@@ -133,6 +124,20 @@ export default function App() {
   );
 }
 
+function TopBar() {
+  return (
+    <View style={styles.headerBar}>
+      <View style={styles.headerLeft}>
+        <View style={styles.logoCircle}>
+          <Ionicons name="infinite" size={16} color="#FFFFFF" />
+        </View>
+        <Text style={styles.headerTitle}>Sikt</Text>
+      </View>
+      <Ionicons name="ellipsis-vertical" size={20} color="#FFFFFF" />
+    </View>
+  );
+}
+
 const colors = {
   background: '#f6f2fd',
   purple: '#6b4eff',
@@ -152,27 +157,38 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 32,
   },
-  topBar: {
-    height: 10,
-    backgroundColor: colors.purple,
-  },
-  headerRow: {
+  headerBar: {
+    height: 60,
+    width: '100%',
+    backgroundColor: '#9B5BFF',
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 8,
-    paddingBottom: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 3,
+    elevation: 2,
   },
-  brandRow: {
+  headerLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
   },
-  brandText: {
+  logoCircle: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  headerTitle: {
     fontFamily: 'Inter_600SemiBold',
-    fontSize: 20,
-    color: colors.textDark,
-    marginLeft: 6,
+    fontSize: 18,
+    color: '#FFFFFF',
   },
   avatarWrap: {
     alignItems: 'center',
