@@ -63,15 +63,15 @@ export default function App() {
           <Text style={styles.nameText}>Even Martin Ab elseth Riksheim (23)</Text>
           <View style={styles.infoRow}>
             <MaterialIcons name="calendar-today" size={18} color="#1a1a1a" />
-            <Text style={styles.infoText}>Fødselsdato: 24.09.2001</Text>
+            <Text style={styles.infoText}><Text style={styles.infoLabel}>Fødselsdato:</Text> 24.09.2001</Text>
           </View>
           <View style={styles.infoRow}>
             <MaterialIcons name="badge" size={18} color="#1a1a1a" />
-            <Text style={styles.infoText}>Studentnummer: 599264</Text>
+            <Text style={styles.infoText}><Text style={styles.infoLabel}>Studentnummer:</Text> 599264</Text>
           </View>
           <View style={styles.infoRow}>
             <MaterialIcons name="school" size={18} color="#1a1a1a" />
-            <Text style={styles.infoText}>Studiested: Norges teknisk-naturvitenskapelige universitet</Text>
+            <Text style={styles.infoText}><Text style={styles.infoLabel}>Studiested:</Text> Norges teknisk-naturvitenskapelige universitet</Text>
           </View>
         </View>
 
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   nameText: {
-    fontFamily: 'Inter_700Bold',
+    fontFamily: 'Inter_400Regular',
     fontSize: 18,
     color: colors.textDark,
     marginBottom: 6,
@@ -239,6 +239,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_400Regular',
     fontSize: 14,
     color: colors.textDark,
+  },
+  infoLabel: {
+    fontFamily: 'Inter_600SemiBold',
   },
   validityCard: {
     backgroundColor: colors.greenCard,
