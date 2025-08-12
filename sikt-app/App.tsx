@@ -141,7 +141,7 @@ function TopBar() {
 const colors = {
   background: '#f6f2fd',
   purple: '#6b4eff',
-  purpleCard: '#efe8ff',
+  purpleCard: '#F4E2FE',
   greenCard: '#c6f5df',
   textDark: '#1a1a1a',
   textMuted: '#5a5a5a',
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   headerBar: {
     height: 60,
     width: '100%',
-    backgroundColor: colors.purpleCard,
+    backgroundColor: '#F3E2FD',
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
