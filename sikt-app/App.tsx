@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useMemo, useState } from 'react';
-import { Image, Modal, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
@@ -30,17 +31,25 @@ export default function App() {
 
   if (!fontsLoaded) {
     return (
-      <SafeAreaView style={[styles.container, { alignItems: 'center', justifyContent: 'center' }]}>
-        <Text>Loading…</Text>
-      </SafeAreaView>
+      <SafeAreaProvider>
+        <SafeAreaView edges={['top']} style={styles.safeTopArea}>
+          <StatusBar style="dark" backgroundColor="#F3E2FD" translucent={false} />
+        </SafeAreaView>
+        <SafeAreaView edges={['left','right','bottom']} style={[styles.container, { alignItems: 'center', justifyContent: 'center' }]}>
+          <Text>Loading…</Text>
+        </SafeAreaView>
+      </SafeAreaProvider>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      <TopBar />
-      <ScrollView contentContainerStyle={styles.content}>
+    <SafeAreaProvider>
+      <SafeAreaView edges={['top']} style={styles.safeTopArea}>
+        <StatusBar style="dark" backgroundColor="#F3E2FD" translucent={false} />
+        <TopBar />
+      </SafeAreaView>
+      <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
+        <ScrollView contentContainerStyle={styles.content}>
         {/* Profile avatar */}
         <View style={styles.avatarWrap}>
           <Image
@@ -91,36 +100,37 @@ export default function App() {
           <Text style={styles.metaText}>Tidssone: Europe/Oslo</Text>
           <Text style={styles.metaText}>Versjon: 4.1.8</Text>
         </View>
-      </ScrollView>
+        </ScrollView>
 
-      {/* Kontroll modal */}
-      <Modal visible={showKontroll} animationType="slide" transparent>
-        <View style={styles.modalBackdrop}>
-          <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>Kontroll</Text>
-            <Text style={styles.modalBody}>Dette simulerer kontroll av studentbeviset. Alt ser bra ut.</Text>
-            <Pressable onPress={() => setShowKontroll(false)} style={styles.modalClose}>
-              <Text style={styles.modalCloseText}>Lukk</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
-      {/* European student card modal */}
-      <Modal visible={showEuCard} animationType="slide" transparent>
-        <View style={styles.modalBackdrop}>
-          <View style={styles.modalCard}>
-            <Text style={styles.modalTitle}>Europeisk studentbevis</Text>
-            <View style={{ alignItems: 'center', marginTop: 12 }}>
-              <Ionicons name="qr-code" size={160} color="#1a1a1a" />
+        {/* Kontroll modal */}
+        <Modal visible={showKontroll} animationType="slide" transparent>
+          <View style={styles.modalBackdrop}>
+            <View style={styles.modalCard}>
+              <Text style={styles.modalTitle}>Kontroll</Text>
+              <Text style={styles.modalBody}>Dette simulerer kontroll av studentbeviset. Alt ser bra ut.</Text>
+              <Pressable onPress={() => setShowKontroll(false)} style={styles.modalClose}>
+                <Text style={styles.modalCloseText}>Lukk</Text>
+              </Pressable>
             </View>
-            <Pressable onPress={() => setShowEuCard(false)} style={styles.modalClose}>
-              <Text style={styles.modalCloseText}>Lukk</Text>
-            </Pressable>
           </View>
-        </View>
-      </Modal>
-    </SafeAreaView>
+        </Modal>
+
+        {/* European student card modal */}
+        <Modal visible={showEuCard} animationType="slide" transparent>
+          <View style={styles.modalBackdrop}>
+            <View style={styles.modalCard}>
+              <Text style={styles.modalTitle}>Europeisk studentbevis</Text>
+              <View style={{ alignItems: 'center', marginTop: 12 }}>
+                <Ionicons name="qr-code" size={160} color="#1a1a1a" />
+              </View>
+              <Pressable onPress={() => setShowEuCard(false)} style={styles.modalClose}>
+                <Text style={styles.modalCloseText}>Lukk</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 
@@ -152,6 +162,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  safeTopArea: {
+    backgroundColor: '#F3E2FD',
   },
   content: {
     paddingHorizontal: 16,
