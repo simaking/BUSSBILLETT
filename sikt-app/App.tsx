@@ -47,11 +47,7 @@ export default function App() {
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     });
-    // Ensure animations start cleanly from current state
-    textAnim.stopAnimation();
-    buttonAnim.stopAnimation();
-
-    // Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
+    		// Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
     const textFadeIn = Animated.timing(textAnim, {
       toValue: 1,
       duration: 250,
@@ -82,10 +78,11 @@ export default function App() {
     // Start button fade-in immediately
     buttonFadeIn.start();
 
-    Animated.parallel([
+    const parallel = Animated.parallel([
       Animated.loop(Animated.sequence([forward, backward]), { iterations: 3 }),
       Animated.loop(Animated.sequence([textFadeIn, textHold, textFadeOut]), { iterations: 3 }),
-    ]).start(() => {
+    ]);
+    parallel.start(() => {
       // Fade the button back to original color on completion
       buttonFadeOut.start(() => setIsKontrollAnimating(false));
     });
