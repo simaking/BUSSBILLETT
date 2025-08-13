@@ -4,8 +4,7 @@ import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
-const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+// Use Animated.View as the background carrier for the button to avoid animating Pressable directly (Hermes freeze bug)
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -152,9 +151,11 @@ export default function App() {
         </Animated.View>
 
         {/* Buttons */}
-        <AnimatedPressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, { backgroundColor: buttonBackgroundColor }, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
-          <Text style={styles.primaryButtonText}>Kontroll</Text>
-        </AnimatedPressable>
+        <Animated.View style={[styles.primaryButton, { backgroundColor: buttonBackgroundColor }]}>
+          <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.buttonPressable, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
+            <Text style={styles.primaryButtonText}>Kontroll</Text>
+          </Pressable>
+        </Animated.View>
 
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
@@ -349,6 +350,9 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
     marginTop: 16,
+  },
+  buttonPressable: {
+    alignItems: 'center',
   },
   primaryButtonText: {
     fontFamily: 'Inter_600SemiBold',
