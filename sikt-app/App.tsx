@@ -47,8 +47,11 @@ export default function App() {
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     });
+    // Ensure animations start cleanly from current state
+    textAnim.stopAnimation();
+    buttonAnim.stopAnimation();
+
     // Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
-    textAnim.setValue(0);
     const textFadeIn = Animated.timing(textAnim, {
       toValue: 1,
       duration: 250,
@@ -63,7 +66,6 @@ export default function App() {
       useNativeDriver: false,
     });
     // Button: quick fade to #B698F2 at start, then fade back at the end
-    buttonAnim.setValue(0);
     const buttonFadeIn = Animated.timing(buttonAnim, {
       toValue: 1,
       duration: 180,
