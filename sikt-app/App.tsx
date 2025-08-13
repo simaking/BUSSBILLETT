@@ -151,11 +151,10 @@ export default function App() {
         </Animated.View>
 
         {/* Buttons */}
-        <Animated.View style={[styles.primaryButton, { backgroundColor: buttonBackgroundColor }]}>
-          <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.buttonPressable, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
-            <Text style={styles.primaryButtonText}>Kontroll</Text>
-          </Pressable>
-        </Animated.View>
+        <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
+          <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject as any, { backgroundColor: buttonBackgroundColor, borderRadius: 24 }]} />
+          <Text style={styles.primaryButtonText}>Kontroll</Text>
+        </Pressable>
 
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
@@ -350,6 +349,8 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     alignItems: 'center',
     marginTop: 16,
+    overflow: 'hidden',
+    position: 'relative',
   },
   buttonPressable: {
     alignItems: 'center',
