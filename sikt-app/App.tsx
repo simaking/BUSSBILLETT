@@ -5,6 +5,8 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -17,6 +19,7 @@ export default function App() {
   const [isKontrollAnimating, setIsKontrollAnimating] = useState(false);
   const colorAnim = useRef(new Animated.Value(0)).current;
   const textAnim = useRef(new Animated.Value(0)).current;
+  const buttonAnim = useRef(new Animated.Value(0)).current;
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -59,14 +62,32 @@ export default function App() {
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     });
+    // Button: quick fade to #B698F2 at start, then fade back at the end
+    buttonAnim.setValue(0);
+    const buttonFadeIn = Animated.timing(buttonAnim, {
+      toValue: 1,
+      duration: 180,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    });
+    const buttonFadeOut = Animated.timing(buttonAnim, {
+      toValue: 0,
+      duration: 220,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    });
+
+    // Start button fade-in immediately
+    buttonFadeIn.start();
 
     Animated.parallel([
       Animated.loop(Animated.sequence([forward, backward]), { iterations: 3 }),
       Animated.loop(Animated.sequence([textFadeIn, textHold, textFadeOut]), { iterations: 3 }),
     ]).start(() => {
-      setIsKontrollAnimating(false);
+      // Fade the button back to original color on completion
+      buttonFadeOut.start(() => setIsKontrollAnimating(false));
     });
-  }, [colorAnim, isKontrollAnimating, textAnim]);
+  }, [colorAnim, isKontrollAnimating, textAnim, buttonAnim]);
   const onShowEu = useCallback(() => setShowEuCard(true), []);
 
   if (!fontsLoaded) {
@@ -89,6 +110,7 @@ export default function App() {
   const headerTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#F7FAF8'] });
   const subTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textMuted, '#F7FAF8'] });
   const expireTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#F7FAF8'] });
+  const buttonBackgroundColor = buttonAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.purple, '#B698F2'] });
 
   return (
     <SafeAreaProvider>
@@ -131,9 +153,9 @@ export default function App() {
         </Animated.View>
 
         {/* Buttons */}
-        <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
+        <AnimatedPressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, { backgroundColor: buttonBackgroundColor }, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
           <Text style={styles.primaryButtonText}>Kontroll</Text>
-        </Pressable>
+        </AnimatedPressable>
 
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
