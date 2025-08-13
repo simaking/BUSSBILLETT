@@ -86,9 +86,9 @@ export default function App() {
     inputRange: [0, 0.5, 1],
     outputRange: ['#c6f5df', '#7ABD9E', '#106A42'],
   });
-  const headerTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#FFFFFF'] });
-  const subTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textMuted, '#FFFFFF'] });
-  const expireTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#FFFFFF'] });
+  const headerTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#F7FAF8'] });
+  const subTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textMuted, '#F7FAF8'] });
+  const expireTextColor = textAnim.interpolate({ inputRange: [0, 1], outputRange: [colors.textDark, '#F7FAF8'] });
 
   return (
     <SafeAreaProvider>
