@@ -4,7 +4,25 @@ import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import Svg, { Circle, Path } from 'react-native-svg';
+
 // Use Animated.View as the background carrier for the button to avoid animating Pressable directly (Hermes freeze bug)
+
+function SiktLogo({ size = 18, color = '#6b4eff' }: { size?: number; color?: string }) {
+  const w = size;
+  const h = Math.round(size * 0.66);
+  const stroke = Math.max(2, Math.round(size * 0.12));
+  const r = h / 2 - stroke / 2;
+  const cx1 = r + stroke / 2;
+  const cx2 = w - (r + stroke / 2);
+  const cy = h / 2;
+  return (
+    <Svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      <Circle cx={cx1} cy={cy} r={r} stroke={color} strokeWidth={stroke} fill="none" />
+      <Circle cx={cx2} cy={cy} r={r} stroke={color} strokeWidth={stroke} fill="none" />
+    </Svg>
+  );
+}
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -135,7 +153,7 @@ export default function App() {
           </View>
           <View style={styles.infoRow}>
             <MaterialIcons name="badge" size={18} color="#1a1a1a" />
-            <Text style={styles.infoText}><Text style={styles.infoLabel}>Studentnummer:</Text> 599264</Text>
+            <Text style={styles.infoText}><Text style={styles.infoLabel}>Studentnummer:</Text> 557345</Text>
           </View>
           <View style={styles.infoRow}>
             <MaterialIcons name="school" size={18} color="#1a1a1a" />
@@ -207,7 +225,7 @@ function TopBar() {
     <View style={styles.headerBar}>
       <View style={styles.headerLeft}>
         <View style={styles.logoCircle}>
-          <Ionicons name="infinite" size={16} color="#FFFFFF" />
+          <SiktLogo size={18} color="#6b4eff" />
         </View>
         <Text style={styles.headerTitle}>Sikt</Text>
       </View>
@@ -262,6 +280,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
+    backgroundColor: '#FFFFFF',
     borderWidth: 2,
     borderColor: '#FFFFFF',
     alignItems: 'center',
