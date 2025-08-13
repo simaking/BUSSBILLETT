@@ -177,7 +177,7 @@ export default function App() {
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
             <Text style={styles.outlineText}>Europeisk studentbevis</Text>
-            <Ionicons name="qr-code" size={18} color={colors.purple} style={{ marginLeft: 8 }} />
+            <Ionicons name="qr-code" size={18} color="#000000" style={{ marginLeft: 8 }} />
           </View>
         </Pressable>
 
@@ -395,9 +395,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   outlineText: {
-    fontFamily: 'Inter_600SemiBold',
+    fontFamily: 'Inter_400Regular',
     fontSize: 16,
-    color: colors.purple,
+    color: '#000000',
   },
   metaWrap: {
     marginTop: 20,
