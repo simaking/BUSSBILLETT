@@ -128,10 +128,10 @@ export default function App() {
 
         {/* Purple Student Profile Card */}
         <View style={styles.profileCard}>
-          <Text style={styles.nameText}>Even Martin Ab elseth Riksheim (23)</Text>
+          <Text style={styles.nameText}>Simon Ishoel (23)</Text>
           <View style={styles.infoRow}>
             <MaterialIcons name="calendar-today" size={18} color="#1a1a1a" />
-            <Text style={styles.infoText}><Text style={styles.infoLabel}>Fødselsdato:</Text> 24.09.2001</Text>
+            <Text style={styles.infoText}><Text style={styles.infoLabel}>Fødselsdato:</Text> 24.01.2002</Text>
           </View>
           <View style={styles.infoRow}>
             <MaterialIcons name="badge" size={18} color="#1a1a1a" />
