@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Left rotated square (diamond shape) -->
+  <rect x="212" y="362" width="300" height="300" rx="60" ry="60"
+        transform="rotate(45 362 512)" fill="black"/>
+  
+  <!-- Right circle -->
+  <circle cx="662" cy="512" r="150" fill="black"/>
+</svg>
