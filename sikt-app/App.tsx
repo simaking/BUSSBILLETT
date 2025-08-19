@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoCircle: {
-    width: 120,
-    height: 54,
+    width: 108,
+    height: 49,
     borderRadius: 0,
     backgroundColor: 'transparent',
     borderWidth: 0,
@@ -283,8 +283,8 @@ const styles = StyleSheet.create({
     marginRight: 0,
   },
   headerLogoImage: {
-    width: 110,
-    height: 34,
+    width: 99,
+    height: 31,
   },
   headerTitle: {
     fontFamily: 'Inter_600SemiBold',
