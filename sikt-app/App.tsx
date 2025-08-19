@@ -221,7 +221,7 @@ function TopBar() {
     <View style={styles.headerBar}>
       <View style={styles.headerLeft}>
         <View style={styles.logoCircle}>
-          <SiktLogo size={18} color="#000000" />
+          <SiktLogo size={54} color="#000000" />
         </View>
         <Text style={styles.headerTitle}>Sikt</Text>
       </View>
@@ -273,9 +273,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
+    width: 54,
+    height: 54,
+    borderRadius: 0,
     backgroundColor: 'transparent',
     borderWidth: 0,
     borderColor: 'transparent',
