@@ -8,7 +8,7 @@ import Svg, { Circle, Rect } from 'react-native-svg';
 
 // Use Animated.View as the background carrier for the button to avoid animating Pressable directly (Hermes freeze bug)
 
-function SiktLogo({ size = 18, color = '#6b4eff' }: { size?: number; color?: string }) {
+function SiktLogo({ size = 18, color = '#000000' }: { size?: number; color?: string }) {
   const w = size;
   const h = size;
   return (
@@ -221,7 +221,7 @@ function TopBar() {
     <View style={styles.headerBar}>
       <View style={styles.headerLeft}>
         <View style={styles.logoCircle}>
-          <SiktLogo size={18} color="#6b4eff" />
+          <SiktLogo size={18} color="#000000" />
         </View>
         <Text style={styles.headerTitle}>Sikt</Text>
       </View>
@@ -276,9 +276,9 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
