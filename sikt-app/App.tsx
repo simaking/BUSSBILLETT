@@ -221,7 +221,7 @@ function TopBar() {
     <View style={styles.headerBar}>
       <View style={styles.headerLeft}>
         <View style={styles.logoCircle}>
-          <SiktLogo size={54} color="#000000" />
+          <Image source={require('./assets/sikt-web-logo.png')} style={styles.headerLogoImage} resizeMode="contain" />
         </View>
         <Text style={styles.headerTitle}>Sikt</Text>
       </View>
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoCircle: {
-    width: 54,
+    width: 120,
     height: 54,
     borderRadius: 0,
     backgroundColor: 'transparent',
@@ -282,6 +282,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
+  },
+  headerLogoImage: {
+    width: 110,
+    height: 34,
   },
   headerTitle: {
     fontFamily: 'Inter_600SemiBold',
