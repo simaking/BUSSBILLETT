@@ -223,7 +223,6 @@ function TopBar() {
         <View style={styles.logoCircle}>
           <Image source={require('./assets/sikt-web-logo.png')} style={styles.headerLogoImage} resizeMode="contain" />
         </View>
-        <Text style={styles.headerTitle}>Sikt</Text>
       </View>
       <Ionicons name="ellipsis-vertical" size={20} color={colors.purple} />
     </View>
@@ -281,7 +280,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: 0,
   },
   headerLogoImage: {
     width: 110,
