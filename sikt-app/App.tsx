@@ -4,22 +4,17 @@ import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import Svg, { Circle, Path } from 'react-native-svg';
+import Svg, { Circle, Rect } from 'react-native-svg';
 
 // Use Animated.View as the background carrier for the button to avoid animating Pressable directly (Hermes freeze bug)
 
 function SiktLogo({ size = 18, color = '#6b4eff' }: { size?: number; color?: string }) {
   const w = size;
-  const h = Math.round(size * 0.66);
-  const stroke = Math.max(2, Math.round(size * 0.12));
-  const r = h / 2 - stroke / 2;
-  const cx1 = r + stroke / 2;
-  const cx2 = w - (r + stroke / 2);
-  const cy = h / 2;
+  const h = size;
   return (
-    <Svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
-      <Circle cx={cx1} cy={cy} r={r} stroke={color} strokeWidth={stroke} fill="none" />
-      <Circle cx={cx2} cy={cy} r={r} stroke={color} strokeWidth={stroke} fill="none" />
+    <Svg width={w} height={h} viewBox="0 0 1024 1024">
+      <Rect x={212} y={362} width={300} height={300} rx={60} ry={60} fill={color} transform="rotate(45 362 512)" />
+      <Circle cx={662} cy={512} r={150} fill={color} />
     </Svg>
   );
 }
