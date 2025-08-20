@@ -33,6 +33,7 @@ export default function App() {
   const textAnim = useRef(new Animated.Value(0)).current;
   const buttonAnim = useRef(new Animated.Value(0)).current;
   const { height: windowHeight } = useWindowDimensions();
+  const extraBoxSpacing = windowHeight * 0.02;
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -131,7 +132,7 @@ export default function App() {
         <TopBar />
       </SafeAreaView>
       <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
-        <ScrollView contentContainerStyle={[styles.content, { paddingTop: windowHeight * 0.07 }]}>
+        <ScrollView contentContainerStyle={[styles.content, { paddingTop: windowHeight * 0.04 }]}>
         {/* Profile avatar */}
         <View style={styles.avatarWrap}>
           <Image
@@ -158,19 +159,19 @@ export default function App() {
         </View>
 
         {/* Green validity card */}
-        <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground }]}>
+        <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground, marginTop: 14 + extraBoxSpacing }]}>
           <Animated.Text style={[styles.validHeader, { color: headerTextColor }]}>Gyldig studentbevis</Animated.Text>
           <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Vår 2025</Animated.Text>
           <Animated.Text style={[styles.validExpire, { color: expireTextColor }]}><Text style={styles.bold}>Utløper:</Text> 31.08.2025</Animated.Text>
         </Animated.View>
 
         {/* Buttons */}
-        <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
+        <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, { marginTop: 14 + extraBoxSpacing }, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
           <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject as any, { backgroundColor: buttonBackgroundColor, borderRadius: 21 }]} />
           <Text style={styles.primaryButtonText}>Kontroll</Text>
         </Pressable>
 
-        <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
+        <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, { marginTop: 10 + extraBoxSpacing }, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
             <Text style={styles.outlineText}>Europeisk studentbevis</Text>
             <Ionicons name="qr-code" size={16} color="#000000" style={{ marginLeft: 7 }} />
