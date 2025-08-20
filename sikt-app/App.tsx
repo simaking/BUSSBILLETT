@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useMemo, useState, useRef } from 'react';
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing, useWindowDimensions } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -32,6 +32,7 @@ export default function App() {
   const colorAnim = useRef(new Animated.Value(0)).current;
   const textAnim = useRef(new Animated.Value(0)).current;
   const buttonAnim = useRef(new Animated.Value(0)).current;
+  const { height: windowHeight } = useWindowDimensions();
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -130,7 +131,7 @@ export default function App() {
         <TopBar />
       </SafeAreaView>
       <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
-        <ScrollView contentContainerStyle={styles.content}>
+        <ScrollView contentContainerStyle={[styles.content, { paddingTop: windowHeight * 0.07 }]}>
         {/* Profile avatar */}
         <View style={styles.avatarWrap}>
           <Image
