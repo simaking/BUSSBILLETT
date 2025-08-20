@@ -249,7 +249,6 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingHorizontal: 16,
-    paddingTop: 64,
     paddingBottom: 32,
   },
   headerBar: {
@@ -257,7 +256,6 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#F3E2FD',
     paddingHorizontal: 16,
-    paddingTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -295,8 +293,8 @@ const styles = StyleSheet.create({
   },
   avatarWrap: {
     alignItems: 'center',
-    marginTop: 32,
-    marginBottom: 28,
+    marginTop: 8,
+    marginBottom: 12,
   },
   avatar: {
     width: 96,
@@ -335,7 +333,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.greenCard,
     borderRadius: 12,
     padding: 16,
-    marginTop: 32,
+    marginTop: 16,
     borderWidth: 2,
     borderColor: '#7bd1a9',
     alignItems: 'center',
@@ -368,7 +366,7 @@ const styles = StyleSheet.create({
     borderRadius: 21,
     paddingVertical: 12,
     alignItems: 'center',
-    marginTop: 28,
+    marginTop: 16,
     overflow: 'hidden',
     position: 'relative',
   },
@@ -386,7 +384,7 @@ const styles = StyleSheet.create({
     borderColor: colors.outline,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    marginTop: 24,
+    marginTop: 12,
     backgroundColor: 'white',
   },
   outlineInner: {
@@ -400,7 +398,7 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   metaWrap: {
-    marginTop: 36,
+    marginTop: 20,
     alignItems: 'center',
     gap: 4,
   },
