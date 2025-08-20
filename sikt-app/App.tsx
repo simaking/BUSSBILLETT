@@ -143,15 +143,15 @@ export default function App() {
         <View style={styles.profileCard}>
           <Text style={styles.nameText}>Simon Ishoel (23)</Text>
           <View style={styles.infoRow}>
-            <MaterialIcons name="calendar-today" size={18} color="#1a1a1a" />
+            <MaterialIcons name="calendar-today" size={16} color="#1a1a1a" />
             <Text style={styles.infoText}><Text style={styles.infoLabel}>Fødselsdato:</Text> 24.01.2002</Text>
           </View>
           <View style={styles.infoRow}>
-            <MaterialIcons name="badge" size={18} color="#1a1a1a" />
+            <MaterialIcons name="badge" size={16} color="#1a1a1a" />
             <Text style={styles.infoText}><Text style={styles.infoLabel}>Studentnummer:</Text> 557345</Text>
           </View>
           <View style={styles.infoRow}>
-            <MaterialIcons name="school" size={18} color="#1a1a1a" />
+            <MaterialIcons name="school" size={16} color="#1a1a1a" />
             <Text style={styles.infoText}><Text style={styles.infoLabel}>Studiested:</Text> Norges teknisk-naturvitenskapelige universitet</Text>
           </View>
         </View>
@@ -165,14 +165,14 @@ export default function App() {
 
         {/* Buttons */}
         <Pressable onPress={runKontrollAnimation} disabled={isKontrollAnimating} style={({ pressed }) => [styles.primaryButton, (pressed || isKontrollAnimating) && { opacity: 0.9 }]}>
-          <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject as any, { backgroundColor: buttonBackgroundColor, borderRadius: 24 }]} />
+          <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFillObject as any, { backgroundColor: buttonBackgroundColor, borderRadius: 21 }]} />
           <Text style={styles.primaryButtonText}>Kontroll</Text>
         </Pressable>
 
         <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
           <View style={styles.outlineInner}>
             <Text style={styles.outlineText}>Europeisk studentbevis</Text>
-            <Ionicons name="qr-code" size={18} color="#000000" style={{ marginLeft: 8 }} />
+            <Ionicons name="qr-code" size={16} color="#000000" style={{ marginLeft: 7 }} />
           </View>
         </Pressable>
 
@@ -305,25 +305,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.purpleCard,
     borderColor: '#8665b9',
     borderWidth: 2,
-    borderRadius: 14,
-    padding: 16,
-    gap: 8,
+    borderRadius: 12,
+    padding: 14,
+    gap: 7,
   },
   nameText: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.textDark,
-    marginBottom: 6,
+    marginBottom: 5,
   },
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 7,
   },
   infoText: {
     flex: 1,
     fontFamily: 'Inter_400Regular',
-    fontSize: 14,
+    fontSize: 12,
     color: colors.textDark,
   },
   infoLabel: {
@@ -331,25 +331,25 @@ const styles = StyleSheet.create({
   },
   validityCard: {
     backgroundColor: colors.greenCard,
-    borderRadius: 14,
-    padding: 18,
-    marginTop: 16,
+    borderRadius: 12,
+    padding: 16,
+    marginTop: 14,
     borderWidth: 2,
     borderColor: '#7bd1a9',
     alignItems: 'center',
   },
   validHeader: {
     fontFamily: 'Inter_700Bold',
-    fontSize: 18,
+    fontSize: 16,
     color: colors.textDark,
-    marginBottom: 4,
+    marginBottom: 3,
     textAlign: 'center',
   },
   validSub: {
     fontFamily: 'Inter_500Medium',
-    fontSize: 14,
+    fontSize: 12,
     color: colors.textMuted,
-    marginBottom: 6,
+    marginBottom: 5,
     textAlign: 'center',
   },
   bold: {
@@ -357,16 +357,16 @@ const styles = StyleSheet.create({
   },
   validExpire: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 14,
+    fontSize: 12,
     color: colors.textDark,
     textAlign: 'center',
   },
   primaryButton: {
     backgroundColor: colors.purple,
-    borderRadius: 24,
-    paddingVertical: 14,
+    borderRadius: 21,
+    paddingVertical: 12,
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 14,
     overflow: 'hidden',
     position: 'relative',
   },
@@ -376,15 +376,15 @@ const styles = StyleSheet.create({
   primaryButtonText: {
     fontFamily: 'Inter_600SemiBold',
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
   },
   outlineButton: {
-    borderRadius: 16,
+    borderRadius: 14,
     borderWidth: 2,
     borderColor: colors.outline,
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    marginTop: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    marginTop: 10,
     backgroundColor: 'white',
   },
   outlineInner: {
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
   },
   outlineText: {
     fontFamily: 'Inter_400Regular',
-    fontSize: 16,
+    fontSize: 14,
     color: '#000000',
   },
   metaWrap: {
