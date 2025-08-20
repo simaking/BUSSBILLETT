@@ -34,6 +34,11 @@ export default function App() {
   const buttonAnim = useRef(new Animated.Value(0)).current;
   const { height: windowHeight } = useWindowDimensions();
   const extraBoxSpacing = windowHeight * 0.02;
+  // To truly center the avatar between the top bar bottom and first box top, the
+  // spacing above and below need to be equal. The top spacing is paddingTop (4% height)
+  // plus avatarWrap's marginTop (8). We mirror that on the bottom via an inline style.
+  const topGapToAvatarTop = windowHeight * 0.04 + 8;
+  const avatarSize = Math.max(88, Math.min(140, Math.round(windowHeight * 0.11)));
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -134,10 +139,10 @@ export default function App() {
       <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
         <ScrollView contentContainerStyle={[styles.content, { paddingTop: windowHeight * 0.04 }]}>
         {/* Profile avatar */}
-        <View style={styles.avatarWrap}>
+        <View style={[styles.avatarWrap, { marginBottom: topGapToAvatarTop }]}>
           <Image
             source={{ uri: 'https://i.pravatar.cc/160?img=12' }}
-            style={styles.avatar}
+            style={[styles.avatar, { width: avatarSize, height: avatarSize, borderRadius: avatarSize / 2 }]}
           />
         </View>
 
