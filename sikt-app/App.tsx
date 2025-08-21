@@ -33,7 +33,7 @@ export default function App() {
   const textAnim = useRef(new Animated.Value(0)).current;
   const buttonAnim = useRef(new Animated.Value(0)).current;
   const { height: windowHeight } = useWindowDimensions();
-  const contentTopPadding = useMemo(() => windowHeight * 0.07 * 0.8, [windowHeight]);
+  const contentTopPadding = useMemo(() => windowHeight * 0.07 * 0.65, [windowHeight]);
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
