@@ -33,6 +33,7 @@ export default function App() {
   const textAnim = useRef(new Animated.Value(0)).current;
   const buttonAnim = useRef(new Animated.Value(0)).current;
   const { height: windowHeight } = useWindowDimensions();
+  const contentTopPadding = useMemo(() => windowHeight * 0.07, [windowHeight]);
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -131,9 +132,9 @@ export default function App() {
         <TopBar />
       </SafeAreaView>
       <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
-        <ScrollView contentContainerStyle={[styles.content, { paddingTop: windowHeight * 0.07 }]}>
+        <ScrollView contentContainerStyle={[styles.content, { paddingTop: contentTopPadding }]}> 
         {/* Profile avatar */}
-        <View style={styles.avatarWrap}>
+        <View style={[styles.avatarWrap, { marginBottom: contentTopPadding + 8 }]}>
           <Image
             source={{ uri: 'https://i.pravatar.cc/160?img=12' }}
             style={styles.avatar}
