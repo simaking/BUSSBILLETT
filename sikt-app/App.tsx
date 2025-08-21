@@ -214,9 +214,15 @@ export default function App() {
               <View style={{ alignItems: 'center', marginTop: 12 }}>
                 <Ionicons name="qr-code" size={160} color="#1a1a1a" />
               </View>
-              <Pressable onPress={() => setShowEuCard(false)} style={styles.modalClose}>
-                <Text style={styles.modalCloseText}>Lukk</Text>
-              </Pressable>
+              <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
+  <View style={styles.outlineInner}>
+    <Text style={[styles.outlineText, { fontSize: 16, fontFamily: 'Inter_600SemiBold' }]}>
+      Europeisk studentbevis
+    </Text>
+    <Ionicons name="qr-code" size={24} color="#000000" style={{ marginLeft: 7 }} />
+  </View>
+</Pressable>
+
             </View>
           </View>
         </Modal>
