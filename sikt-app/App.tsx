@@ -179,11 +179,19 @@ export default function App() {
         </Pressable>
 
         {/* Footer metadata */}
-        <View style={styles.metaWrap}>
-          <Text style={styles.metaText}>Sist oppdatert: {updatedAt}</Text>
-          <Text style={styles.metaText}>Tidssone: Europe/Oslo</Text>
-          <Text style={styles.metaText}>Versjon: 4.1.8</Text>
-        </View>
+        
+  <View style={styles.metaWrap}>
+    <Text style={styles.metaText}>
+      <Text style={styles.bold}>Sist oppdatert:</Text> {updatedAt}
+    </Text>
+    <Text style={styles.metaText}>
+      <Text style={styles.bold}>Tidssone:</Text> Europe/Oslo
+    </Text>
+    <Text style={styles.metaText}>
+      <Text style={styles.bold}>Versjon:</Text> 4.1.8
+    </Text>
+  </View>
+
 
         {/* Kontroll modal */}
         <Modal visible={showKontroll} animationType="slide" transparent>
