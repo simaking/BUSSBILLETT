@@ -456,6 +456,6 @@ const styles = StyleSheet.create({
   // New style for bold + darker meta labels
   metaLabel: {
     fontFamily: 'Inter_600SemiBold',
-    color: colors.textDark,
+    color: '#000000',
   },
 });
