@@ -188,7 +188,7 @@ export default function App() {
   <Text style={styles.metaLabel}>Tidssone:</Text> Europe/Oslo
 </Text>
 <Text style={styles.metaText}>
-  <Text style={styles.metaLabel}>Versjon:</Text> 4.1.8
+  <Text style={styles.metaLabel}>Versjon:</Text> <Text style={styles.metaLabel}>4.1.8</Text>
 </Text>
   </View>
 
