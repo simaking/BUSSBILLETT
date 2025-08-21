@@ -135,7 +135,7 @@ export default function App() {
         {/* Profile avatar */}
         <View style={[styles.avatarWrap, { marginBottom: avatarGap, marginTop: 0 }]}> 
           <Image
-            source={{ uri: 'https://i.pravatar.cc/160?img=12' }}
+            source={require('./assets/avatar.jpg')}
             style={styles.avatar}
           />
         </View>
