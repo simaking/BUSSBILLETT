@@ -182,14 +182,14 @@ export default function App() {
         
   <View style={styles.metaWrap}>
     <Text style={styles.metaText}>
-      <Text style={styles.bold}>Sist oppdatert:</Text> {updatedAt}
-    </Text>
-    <Text style={styles.metaText}>
-      <Text style={styles.bold}>Tidssone:</Text> Europe/Oslo
-    </Text>
-    <Text style={styles.metaText}>
-      <Text style={styles.bold}>Versjon:</Text> 4.1.8
-    </Text>
+  <Text style={styles.metaLabel}>Sist oppdatert:</Text> {updatedAt}
+</Text>
+<Text style={styles.metaText}>
+  <Text style={styles.metaLabel}>Tidssone:</Text> Europe/Oslo
+</Text>
+<Text style={styles.metaText}>
+  <Text style={styles.metaLabel}>Versjon:</Text> 4.1.8
+</Text>
   </View>
 
 
@@ -452,5 +452,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Inter_600SemiBold',
     fontSize: 15,
+  },
+  // New style for bold + darker meta labels
+  metaLabel: {
+    fontFamily: 'Inter_600SemiBold',
+    color: colors.textDark,
   },
 });
