@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useMemo, useState, useRef } from 'react';
-import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing, useWindowDimensions } from 'react-native';
+import { Image, Modal, Pressable, ScrollView, StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
@@ -32,8 +32,7 @@ export default function App() {
   const colorAnim = useRef(new Animated.Value(0)).current;
   const textAnim = useRef(new Animated.Value(0)).current;
   const buttonAnim = useRef(new Animated.Value(0)).current;
-  const { height: windowHeight } = useWindowDimensions();
-  const contentTopPadding = useMemo(() => windowHeight * 0.07 * 0.65, [windowHeight]);
+  const avatarGap = 36; // fixed gap to center avatar with tighter spacing
 
   const now = useMemo(() => new Date(), []);
   const updatedAt = useMemo(() => {
@@ -132,9 +131,9 @@ export default function App() {
         <TopBar />
       </SafeAreaView>
       <SafeAreaView edges={['left','right','bottom']} style={styles.container}>
-        <ScrollView contentContainerStyle={[styles.content, { paddingTop: contentTopPadding }]}> 
+        <ScrollView contentContainerStyle={[styles.content, { paddingTop: avatarGap }]}> 
         {/* Profile avatar */}
-        <View style={[styles.avatarWrap, { marginBottom: contentTopPadding + 8 }]}>
+        <View style={[styles.avatarWrap, { marginBottom: avatarGap, marginTop: 0 }]}> 
           <Image
             source={{ uri: 'https://i.pravatar.cc/160?img=12' }}
             style={styles.avatar}
@@ -295,8 +294,6 @@ const styles = StyleSheet.create({
   },
   avatarWrap: {
     alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 12,
   },
   avatar: {
     width: 96,
