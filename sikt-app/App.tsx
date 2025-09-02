@@ -161,7 +161,7 @@ export default function App() {
         {/* Green validity card */}
         <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground }]}>
           <Animated.Text style={[styles.validHeader, { color: headerTextColor }]}>Gyldig studentbevis</Animated.Text>
-          <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Vinter 2026</Animated.Text>
+          <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Høst 2025</Animated.Text>
           <Animated.Text style={[styles.validExpire, { color: expireTextColor }]}><Text style={styles.bold}>Utløper:</Text> 31.01.2026</Animated.Text>
         </Animated.View>
 
