@@ -61,7 +61,7 @@ export default function App() {
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     });
-    		// Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
+        // Text animation: fade to white in first 250ms, hold for 500ms, fade back in last 250ms
     const textFadeIn = Animated.timing(textAnim, {
       toValue: 1,
       duration: 250,
@@ -161,8 +161,8 @@ export default function App() {
         {/* Green validity card */}
         <Animated.View style={[styles.validityCard, { backgroundColor: animatedCardBackground }]}>
           <Animated.Text style={[styles.validHeader, { color: headerTextColor }]}>Gyldig studentbevis</Animated.Text>
-          <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Vår 2025</Animated.Text>
-          <Animated.Text style={[styles.validExpire, { color: expireTextColor }]}><Text style={styles.bold}>Utløper:</Text> 31.08.2025</Animated.Text>
+          <Animated.Text style={[styles.validSub, { color: subTextColor }]}>Vinter 2026</Animated.Text>
+          <Animated.Text style={[styles.validExpire, { color: expireTextColor }]}><Text style={styles.bold}>Utløper:</Text> 31.01.2026</Animated.Text>
         </Animated.View>
 
         {/* Buttons */}
@@ -194,37 +194,49 @@ export default function App() {
 
 
         {/* Kontroll modal */}
-        <Modal visible={showKontroll} animationType="slide" transparent>
-          <View style={styles.modalBackdrop}>
-            <View style={styles.modalCard}>
+        <Modal
+          visible={showKontroll}
+          animationType="slide"
+          transparent
+          onRequestClose={() => setShowKontroll(false)}  // Android back
+        >
+          <Pressable
+            style={styles.modalBackdrop}
+            onPress={() => setShowKontroll(false)}        // Tap outside closes
+          >
+            <Pressable
+              style={styles.modalCard}
+              onPress={(e) => e.stopPropagation()}        // Prevent closing when tapping inside
+            >
               <Text style={styles.modalTitle}>Kontroll</Text>
               <Text style={styles.modalBody}>Dette simulerer kontroll av studentbeviset. Alt ser bra ut.</Text>
-              <Pressable onPress={() => setShowKontroll(false)} style={styles.modalClose}>
-                <Text style={styles.modalCloseText}>Lukk</Text>
-              </Pressable>
-            </View>
-          </View>
+              {/* Bevisst ingen fysisk Lukk-knapp */}
+            </Pressable>
+          </Pressable>
         </Modal>
 
         {/* European student card modal */}
-        <Modal visible={showEuCard} animationType="slide" transparent>
-          <View style={styles.modalBackdrop}>
-            <View style={styles.modalCard}>
+        <Modal
+          visible={showEuCard}
+          animationType="slide"
+          transparent
+          onRequestClose={() => setShowEuCard(false)}     // Android back
+        >
+          <Pressable
+            style={styles.modalBackdrop}
+            onPress={() => setShowEuCard(false)}          // Tap outside closes
+          >
+            <Pressable
+              style={styles.modalCard}
+              onPress={(e) => e.stopPropagation()}        // Prevent closing when tapping inside
+            >
               <Text style={styles.modalTitle}>Europeisk studentbevis</Text>
               <View style={{ alignItems: 'center', marginTop: 12 }}>
                 <Ionicons name="qr-code" size={160} color="#1a1a1a" />
               </View>
-              <Pressable onPress={onShowEu} style={({ pressed }) => [styles.outlineButton, pressed && { opacity: 0.9 }]}>
-  <View style={styles.outlineInner}>
-    <Text style={[styles.outlineText, { fontSize: 16, fontFamily: 'Inter_600SemiBold' }]}>
-      Europeisk studentbevis
-    </Text>
-    <Ionicons name="qr-code" size={24} color="#000000" style={{ marginLeft: 7 }} />
-  </View>
-</Pressable>
-
-            </View>
-          </View>
+              {/* Fjernet tidligere knapp som åpnet modalen på nytt */}
+            </Pressable>
+          </Pressable>
         </Modal>
         </ScrollView>
       </SafeAreaView>
